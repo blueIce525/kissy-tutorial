@@ -1,0 +1,109 @@
+.container {
+	width: 100%;
+}
+.scroll-block {
+	width: 100%;
+	height: 500px;
+	line-height: 100px;
+	padding-top: 100px;
+	padding-bottom: 100px;
+	color: #fff;
+	text-align: center;
+}
+.scroll-block h2 {
+	font-size: 70px;
+	font-weight: normal;
+}
+.scroll-block p {
+	font-size: 36px;
+}
+.block-large {
+	height: 700px;
+}
+.block-xlarge {
+	height: 900px;
+}
+.block-xxlarge {
+	height: 1100px;
+}
+.block-small {
+	height: 400px;
+}
+.block-xsmall {
+	height: 300px;
+}
+.block-xxsmall {
+	height: 200px;
+}
+.block-blue {
+	background-color: #049cdb;
+}
+.block-green {
+	background-color: #46a546;
+}
+.block-red {
+	background-color: #9d261d;
+}
+.block-yellow {
+	background-color: #ffc40d;
+}
+.block-orange {
+	background-color: #f89406;
+}
+.block-pink {
+	background-color: #c3325f;
+}
+.block-purple {
+	background-color: #7a43b6;
+}
+.block-darkblue {
+	background-color: #06406c;
+}
+.block-darkred {
+	background-color: #4c0d09;
+}
+.block-lightpink {
+	background-color: #ffc19f;
+}
+.block-white {
+	background-color: #fff;
+	color: #000;
+}
+.block-black {
+	background-color: #000;
+}
+.scroll-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+.scroll-nav ul {
+	list-style: none;
+	width: 10px;
+}
+.scroll-nav ul li {
+	display: block;
+	width: 100%;
+	height: 30px;
+}
+.scroll-nav ul li a {
+	display: none;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: bold;
+	overflow: hidden;
+
+}
+.scroll-nav ul:hover {
+	width: 100px;
+}
+.scroll-nav ul li:hover {
+	box-shadow: 5px 0 8px #aaa;
+}
+.scroll-nav ul:hover li a {
+	display: block;
+}
