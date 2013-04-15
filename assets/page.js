@@ -1,5 +1,6 @@
 KISSY.use('dom, node, event, anim', function(S, D, N, E, A){
 	S.ready(function(){
+
 		var blockList = D.query('.scroll-block');
 		var length = blockList.length;
 		var blockOffsetTop = S.map(blockList, function(el) {
@@ -44,5 +45,8 @@ KISSY.use('dom, node, event, anim', function(S, D, N, E, A){
 				}
 			}
 		});
+
+		S.all('pre').addClass('prettyprint');
+		prettyPrint();
 	});
 });
