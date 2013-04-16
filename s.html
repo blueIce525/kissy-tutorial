@@ -8,8 +8,14 @@
 		padding: 0;
 	}
 	.content {
-		width: 840px;
-		margin: 100px auto;
+		width: 500px;
+		height: 500px;
+		margin: 60px auto 0;
+		position: relative;
+	}
+	.img {
+		height: 500px;
+		position: relative;
 	}
 	.img:after {
 		content: '';
@@ -22,38 +28,72 @@
 		list-style: none;
 	}
 	ul li {
-		float: left;
 		display: inline-block;
-		margin-left: 20px;
-		margin-right: 20px;
 		width: 100px;
 		height: 100px;
+		position: absolute;
 	}
-	ul li a {
-		display: block;
+	ul li.list1 {
+		top: -50px;
+		left: 200px;
 	}
-	ul li a img {
+	ul li.list2 {
+		top: 8px;
+		left: 39px;
+	}
+	ul li.list9 {
+		top: 8px;
+		left: 361px;
+	}
+	ul li.list3 {
+		top: 157px;
+		left: -46px;
+	}
+	ul li.list8 {
+		top: 157px;
+		left: 446px;
+	}
+	ul li.list4 {
+		top: 325px;
+		left: -17px;
+	}
+	ul li.list7 {
+		top: 325px;
+		left: 417px;
+	}
+	ul li.list5 {
+		top: 435px;
+		left: 114px;
+	}
+	ul li.list6 {
+		top: 435px;
+		left: 286px;
+	}
+	ul li img {
 		width: 100px;
 		height: 100px;
 		border-radius: 50px;
-		opacity: 0.3;
+		opacity: 0.2;
 	}
-	ul li.active a img {
+	ul li.active img {
 		opacity: 1;
 	}
 	button {
-		display: block;
-		width: 200px;
+		position: absolute;
+		top: 330px;
+		left: 200px;
+		width: 100px;
 		height: 50px;
 		text-align: center;
 		margin: 50px auto;
 	}
 	.detail {
-		width: 300px;
-		height: 150px;
-		margin: 50px auto;
-		border: 1px solid #ccc;
-		border-radius: 10px;
+		position: absolute;
+		display: none;
+		top: 80px;
+		left: 158px;
+		width: 183px;
+		height: 275px;
 		box-shadow: 0 0 5px #ccc;
 	}
 	</style>
@@ -62,12 +102,15 @@
 	<div class="content">
 		<div class="img">
 			<ul class="img-list">
-				<li class="active"><a href="javascript:void(0)"><img src="./assets/1.png" /></a></li>
-				<li><a href="javascript:void(0)"><img src="./assets/2.png" /></a></li>
-				<li><a href="javascript:void(0)"><img src="./assets/3.png" /></a></li>
-				<li><a href="javascript:void(0)"><img src="./assets/4.png" /></a></li>
-				<li><a href="javascript:void(0)"><img src="./assets/5.png" /></a></li>
-				<li><a href="javascript:void(0)"><img src="./assets/6.png" /></a></li>
+				<li class="list1 active"><img src="./assets/op/1.png" /></li>
+				<li class="list2"><img src="./assets/op/2.png" /></li>
+				<li class="list3"><img src="./assets/op/3.png" /></li>
+				<li class="list4"><img src="./assets/op/4.png" /></li>
+				<li class="list5"><img src="./assets/op/5.png" /></li>
+				<li class="list6"><img src="./assets/op/6.png" /></li>
+				<li class="list7"><img src="./assets/op/7.png" /></li>
+				<li class="list8"><img src="./assets/op/8.png" /></li>
+				<li class="list9"><img src="./assets/op/9.png" /></li>
 			</ul>
 		</div>
 		<button class="start">start</button>
@@ -76,69 +119,75 @@
 	</div>
 	<script>
 	KISSY.ready(function(S){
-		var D = S.DOM, E = S.Event, A = S.Anim;
-		var imgList = D.query('li', '.img-list');
-		var length = imgList.length;
-		var startIndex = 0;
-		var timer;
+		var $ = S.all, E = S.Event, A = S.Anim, IO = S.IO;
 
-		function run(index){
-			var next = index + 1 === length ? 0 : index + 1;
-			D.removeClass(imgList, 'active');
-			D.addClass(imgList[next], 'active');
-			startIndex = next;
+		var opLotto = {
+			init: function(){
+				this.imgList = $('.img-list').all('li');
+				this.length = this.imgList.length;
+				this.startIndex = 0;
+			},
+			_run: function(index){
+				var next = index + 1 === this.length ? 0 : index + 1;
+				this.imgList.removeClass('active');
+				$(this.imgList[next]).addClass('active');
+				this.startIndex = next;
+			},
+			start: function(){
+				var self = this;
+				self.timer = setInterval(function(){
+					self._run(self.startIndex);
+				}, 50);
+			},
+			pause: function(){
+				this.timer && clearInterval(this.timer);
+				this._animate(this.startIndex);
+			},
+			_animate: function(index) {
+				var self = this;
+				var selectdeItem = $(self.imgList[index]);
+				var offsetTop = selectdeItem.css('top');
+				var offsetLeft = selectdeItem.css('left');
+				var cloneItem = selectdeItem.one('img').clone().appendTo('.content');
+				cloneItem.css({
+					'width': '100px',
+					'height': '100px',
+					'position': 'absolute',
+					'top': offsetTop,
+					'left': offsetLeft,
+					'border-radius': '50px'
+				}).animate({
+					'top': parseInt(offsetTop, 10) - 50
+				}, 0.2, 'easeOut').animate({
+					'top': 200,
+					'left': 200,
+					'opacity': 0
+				}, 1, 'bounceOut', function() {
+					cloneItem.remove();
+					self._print(index);
+				});
+			},
+			_print: function(index){
+				IO.get('./server.php', {'index': index}, function(data){
+					$('.detail').html('<img src="' + data.url + '" />').fadeIn(0.5);
+				}, 'json')
+			}
 		}
 
-		function start(){
-			timer = window.setInterval(function(){
-				run(startIndex);
-			}, 50);
-		}
-		
-		function pause(){
-			window.clearInterval(timer);
-			animate(startIndex);
-		}
-
-		function animate(index){
-			var selectdeItem = D.get('img', imgList[index]);
-			var cloneItem = D.clone(selectdeItem);
-			D.append(cloneItem, 'body');
-			D.css(cloneItem, {'width': '100px', 'height': '100px', 'top': '100px', 'border-radius': '50px', 'position': 'absolute'});
-			D.offset(cloneItem, {'left': D.offset(selectdeItem).left});
-			A(cloneItem, {'top': '50px'}, 0.3, 'easeOut', function(){
-				A(cloneItem, {'top': '350px',
-							'left': D.offset('.detail').left + 100,
-							'opacity': 0}
-				, 1.2, 'bounceOut', function(){
-					D.remove(cloneItem);
-					print(index);
-				}).run();
-			}).run();
-		}
-
-		function print(index){
-			S.IO.get('./server.php', {'index': index}, function(data){
-				D.html('.detail', data.name);
-			}, 'json')
-		}
+		opLotto.init();
 
 		E.on('button', 'click', function(ev){
 			var self = this;
-			if(D.hasClass(self, 'start')){
-				D.replaceClass(self, 'start', 'pause');
-				D.html(self, 'pause');
-				start();
+			if($(self).hasClass('start')){
+				$(self).replaceClass('start', 'pause').html('pause');
+				$('.detail').fadeOut();
+				opLotto.start();
 			}
 			else{
-				D.replaceClass(self, 'pause', 'start');
-				D.html(self, 'start');
-				pause();
+				$(self).replaceClass('pause', 'start').html('start');
+				opLotto.pause();
 			}
 		})
-
-
-		
 	})
 	</script>
 </body>
