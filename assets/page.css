@@ -3,25 +3,38 @@
 }
 .scroll-block {
 	width: 100%;
-	line-height: 100px;
-	padding-top: 100px;
-	padding-bottom: 100px;
+	line-height: 80px;
+	padding-top: 80px;
+	padding-bottom: 80px;
 	color: #fff;
 	text-align: center;
 }
 .scroll-block h2 {
-	font-size: 70px;
+	font-size: 60px;
 	font-weight: normal;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
+
 .scroll-block pre code {
+	display: inline-block;
 	font-size: 24px;
-	background-color: #333;
+	line-height: 24px;
+	background-color: #444;
 	padding: 10px;
 	border-radius: 10px;
+	text-align: left;
 }
 .scroll-block p {
-	font-size: 36px;
+	font-size: 32px;
+}
+.scroll-block li {
+	font-size: 32px;
+}
+.scroll-block a {
+	background-color: #444;
+	padding: 10px;
+	border-radius: 10px;
+	color: #fff;
 }
 .block-normal {
 	height: 500px;
@@ -46,6 +59,14 @@
 }
 .block-blue {
 	background-color: #049cdb;
+}
+.block-smallblue {
+	background-color: #d1e8fa;
+	color: #06406c;
+}
+.block-lightblue {
+	background-color: #a0d1f1;
+	color: #06406c;
 }
 .block-green {
 	background-color: #46a546;

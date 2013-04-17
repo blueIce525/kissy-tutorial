@@ -110,10 +110,6 @@ ul {
     padding: 10px;
 }
 
-pre {
-    font-size: 18px;
-}
-
 blockquote {
     text-align: left;
     width: 720px;
@@ -124,6 +120,7 @@ blockquote {
 }
 
 code {
+    display: inline-block;
     background-color: #000;
     font-style: normal;
     border-radius: 10px;
@@ -227,6 +224,14 @@ code {
 .block-kissy code {
     background-color: #000;
     color: #FFF;
+}
+
+.block-demo {
+    background-color: #06406c;
+}
+
+.block-demo p {
+    color: #fff;
 }
 
 .block-seed {

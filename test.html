@@ -2,55 +2,109 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>KISSY Tutorial</title>
+	<title>KISSY新手简易指南</title>
 	<link rel="stylesheet" href="http://a.tbcdn.cn/p/global/1.0/global-min.css">
 	<link rel="stylesheet" href="./assets/page.css">
 </head>
 <body>
 	<div class="container">
 		<div class="scroll-block block-white" id="step1">
-			<h2>KISSY 快速上手</h2>
-			<p>balabalabala~</p>
+			<h2>KISSY - 简易指南</h2>
+		    <p>刚开始使用KISSY的童鞋看过来，快速上手文档在这里。</p>
+		    <img src="./assets/logo.png" alt=""/>
+		    <p>Let's go</p>
+		    <img src="./assets/arrow.png" alt=""/>
 		</div>
-		<div class="scroll-block block-large block-lightpink" id="step2">
+		<div class="scroll-block block-smallblue" id="step2">
 			<h2>简介</h2>
-			<p>balabalabala~</p>
-			<p>balabalabala~</p>
-			<p>balabalabala~</p>
-			<p>balabalabala~</p>
+		    <p>
+		        KISSY是淘宝的前端类库。
+		    </p>
+		    <p>优点如下：</p>
+		    <ul>
+		        <li>A、开发便捷， 在模块化，组件以及工具辅助方面形成了一套完善的机制；</li>
+		        <li>B、综合借鉴国际先进的框架类库设计；</li>
+		        <li>C、应用场景广泛：支持pc和移动端的开发。</li>
+		    </ul>
 		</div>
-		<div class="scroll-block block-small block-pink" id="step3">
-			<h2>引入</h2>
-			<pre><code>http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js</code></pre>
-			<pre><code>http://a.tbcdn.cn/s/kissy/1.3.0/seed-min.js</code></pre>
-			<pre><code>&lt;script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js"&gt;&lt;/script&gt;</code></pre>
+		<div class="scroll-block block-lightblue" id="step3">
+			<h2>下载引入</h2>
+		    <p>
+		        <a href="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js">下载 KISSY 1.3.0</a>
+		    </p>
+		    <p>
+		        <a href="http://a.tbcdn.cn/s/kissy/1.3.0/seed-min.js">下载 KISSY seed 1.3.0</a>
+		    </p>
+		    <p>引入方式有两种：</p>
+		    <p>核心全部加载引入完整的KISSY；按需加载引入seed。</p>
 		</div>
-		<div class="scroll-block block-xlarge block-red" id="step4">
+		<div class="scroll-block block-blue" id="step4">
+			<h2>核心全部加载的方式引入</h2>
+		    <p>核心全部加载就是引入整个KISSY库</p>
+		    <p>如果你下载了源码，直接引入kissy-min.js</p>
+		    <pre><code>&lt;script src="kissy-min.js"&gt;&lt;/script&gt;</code></pre>
+
+		    <p>如果你没下载源码，可以直接引用淘宝cdn上的地址</p>
+		    <pre><code>&lt;script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js"&gt;&lt;/script&gt;</code></pre>
+		    <p>下面来看一个demo</p>
+		</div>
+		<div class="scroll-block block-darkblue" id="step5">
 			<h2>demo</h2>
-			<iframe src="./s.html" width="600" frameborder="0" height="600" scrolling="no"></iframe>
+			<iframe src="./demo.html" width="600" frameborder="0" height="600" scrolling="no"></iframe>
+			<p>下面会通过这个demo介绍KISSY的基本用法</p>
 		</div>
-		<div class="scroll-block block-xsmall block-darkred" id="step5">
-			<h2>event</h2>
+		<div class="scroll-block block-purple" id="step6">
+			<h2>操作元素</h2>
+		    <p>KISSY使用了类似jQuery的链式操作，熟悉jQuery的用户可以很快的上手</p>
+		    <p>只需定义</p>
+		    <pre><code>var $ = KISSY.all</code></pre>
+		    <p>就可以进行如下操作</p>
+		    <pre><code>var imgList = $('.img-list').all('li'); //获取图片列表</code></pre>
+		    <pre><code>$(imgList[0]).addClass('active'); //添加class</code></pre>
+		    <pre><code>var cloneItem = $(imgList[0]).one('img')
+	.clone()
+	.appendTo('.content')
+	.css({
+		'width': '100px',
+		'height': '100px'})
+	.animate({
+		'top': '100px'
+	}, 0.2, 'easeOut') //链式操作</code></pre>
 		</div>
-		<div class="scroll-block block-xxlarge block-orange" id="step6">
-			<h2>ajax</h2>
+		<div class="scroll-block block-darkred" id="step7">
+			<h2>绑定事件</h2>
+			<p>KISSY中的事件绑定非常简单</p>
+			<pre><code>KISSY.Event.on('button', 'click', function(ev){
+	//do something
+}</code></pre>
+			<p>也可以用链式方式</p>
+			<pre><code>$('button').on('click', function(ev){
+	//do something
+}</code></pre>
 		</div>
-		<div class="scroll-block block-xxsmall block-yellow" id="step7">
+		<div class="scroll-block block-red" id="step8">
+			<h2>Ajax</h2>
+			<p>KISSY中对Ajax操作进行了一些封装，比如要发起一个GET请求</p>
+			<pre><code>KISSY.IO.get('./server.php', {'param': '001'}, function(data){
+	$('.detail').html(data);
+}, 'json')</code></pre>
+			<p>上面的代码表示向后台 server.php 发起了一个GET请求,</p>
+			<p>请求的参数是 param=001，请求返回的数据格式是 json，</p>
+			<p>请求成功后将返回的数据填充到元素 $('.detail')中</p>
+		</div>
+		<div class="scroll-block block-normal block-pink" id="step9">
+			<h2>seed</h2>
+		</div>
+		<div class="scroll-block block-normal block-lightpink" id="step10">
 			<h2>loader</h2>
 		</div>
-		<div class="scroll-block block-normal block-green" id="step8">
-			<h2>config</h2>
-		</div>
-		<div class="scroll-block block-normal block-blue" id="step9">
-			<h2>demo</h2>
-		</div>
-		<div class="scroll-block block-normal block-darkblue" id="step10">
+		<div class="scroll-block block-normal block-yellow" id="step11">
 			<h2>component</h2>
 		</div>
-		<div class="scroll-block block-normal block-purple" id="step11">
+		<div class="scroll-block block-normal block-orange" id="step12">
 			<h2>gallery</h2>
 		</div>
-		<div class="scroll-block block-normal block-black" id="step12">
+		<div class="scroll-block block-normal block-green" id="step13">
 			<h2>other</h2>
 		</div>
 		<div class="scroll-nav">

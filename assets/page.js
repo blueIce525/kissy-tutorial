@@ -46,7 +46,7 @@ KISSY.use('dom, node, event, anim', function(S, D, N, E, A){
 			}
 		});
 
-		S.all('pre').addClass('prettyprint');
-		prettyPrint();
+		/*S.all('pre').addClass('prettyprint');
+		prettyPrint();*/
 	});
 });
