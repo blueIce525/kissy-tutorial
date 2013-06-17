@@ -25,10 +25,10 @@ KISSY.add(function(S, N, E, A, IO){
 		},
 		_animate: function(index) {
 			var self = this;
-			var selectdeItem = $(self.imgList[index]);
-			var offsetTop = selectdeItem.css('top');
-			var offsetLeft = selectdeItem.css('left');
-			var cloneItem = selectdeItem.one('img').clone().appendTo('.content');
+			var selectedItem = $(self.imgList[index]);
+			var offsetTop = selectedItem.css('top');
+			var offsetLeft = selectedItem.css('left');
+			var cloneItem = selectedItem.one('img').clone().appendTo('.content');
 			cloneItem.css({
 				'width': '100px',
 				'height': '100px',

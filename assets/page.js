@@ -33,7 +33,7 @@ KISSY.use('dom, node, event, anim', function(S, D, N, E, A){
 
 		createNavList();
 
-		E.on('body', 'mousewheel', function(e) {
+		/*E.on('body', 'mousewheel', function(e) {
 			if (e.delta === -1) {
 				getCurrentBlock();
 				var currentPos = D.scrollTop('body') + D.viewportHeight();
@@ -44,7 +44,7 @@ KISSY.use('dom, node, event, anim', function(S, D, N, E, A){
 					}, 0.1).run();
 				}
 			}
-		});
+		});*/
 
 		/*S.all('pre').addClass('prettyprint');
 		prettyPrint();*/
