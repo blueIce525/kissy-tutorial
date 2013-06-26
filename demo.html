@@ -130,7 +130,7 @@
 			_run: function(index){
 				var next = index + 1 === this.length ? 0 : index + 1;
 				this.imgList.removeClass('active');
-				$(this.imgList[next]).addClass('active');
+				this.imgList.item(next).addClass('active');
 				this.startIndex = next;
 			},
 			start: function(){
@@ -145,7 +145,7 @@
 			},
 			_animate: function(index) {
 				var self = this;
-				var selectedItem = $(self.imgList[index]);
+				var selectedItem = self.imgList.item(index);
 				var offsetTop = selectedItem.css('top');
 				var offsetLeft = selectedItem.css('left');
 				var cloneItem = selectedItem.one('img').clone().appendTo('.content').css({
@@ -175,7 +175,7 @@
 
 		opLotto.init();
 
-		E.on('button', 'click', function(ev){
+		$('button').on('click', function(ev){
 			var self = this;
 			if($(self).hasClass('start')){
 				$(self).replaceClass('start', 'pause').html('pause');

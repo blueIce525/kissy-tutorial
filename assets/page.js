@@ -13,7 +13,7 @@ KISSY.use('dom, node, event, anim', function(S, D, N, E, A){
 			blockList.each(function(el){
 				var className = D.attr(el, 'class');
 				var idName = D.attr(el, 'id');
-				var title = D.html(D.get('h2', el));
+				var title = D.attr(el, 'data-title');
 				var colorClass = new RegExp(/.*(block-.*)/).exec(className)[1];
 				navListStr += '<li class="' + colorClass +'"><a href="#' + idName + '">' + title + '</a></li>';
 			});

@@ -10,7 +10,7 @@ KISSY.add(function(S, N, E, A, IO){
 		_run: function(index){
 			var next = index + 1 === this.length ? 0 : index + 1;
 			this.imgList.removeClass('active');
-			$(this.imgList[next]).addClass('active');
+			this.imgList.item(next).addClass('active');
 			this.startIndex = next;
 		},
 		start: function(){
@@ -25,7 +25,7 @@ KISSY.add(function(S, N, E, A, IO){
 		},
 		_animate: function(index) {
 			var self = this;
-			var selectedItem = $(self.imgList[index]);
+			var selectedItem = self.imgList.item(index);
 			var offsetTop = selectedItem.css('top');
 			var offsetLeft = selectedItem.css('left');
 			var cloneItem = selectedItem.one('img').clone().appendTo('.content');
